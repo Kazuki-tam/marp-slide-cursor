@@ -1,0 +1,180 @@
+---
+description: Marp slide generation rules for creating presentations
+globs: *.md,templates/*.md
+alwaysApply: false
+---
+# Marp スライド生成ルール
+
+このルールは、Marp (Markdown Presentation Ecosystem) を使用してプレゼンテーション資料を生成する際のガイドラインです。
+
+## 基本構造
+
+### スライドファイルの基本テンプレート
+```markdown
+---
+marp: true
+theme: gaia
+paginate: true
+backgroundColor: #fff
+---
+
+# プレゼンテーションタイトル
+**サブタイトル**
+
+---
+
+# アジェンダ
+1. 項目1
+2. 項目2
+3. 項目3
+
+---
+
+# セクション1タイトル
+
+内容...
+
+---
+```
+
+## Marp 固有の記法
+
+### ページ分割
+- `---` でページを分割
+- 各スライドは明確な目的を持つこと
+
+### フロントマター設定
+```yaml
+---
+marp: true                    # Marp有効化（必須）
+theme: gaia                   # テーマ (default, gaia, uncover)
+paginate: true               # ページ番号表示
+backgroundColor: #fff        # 背景色
+backgroundImage: url(...)    # 背景画像
+size: 16:9                   # アスペクト比
+class: lead                  # スライドクラス
+---
+```
+
+### 画像とレイアウト
+```markdown
+![bg left:40% 80%](image.jpg)     # 背景画像（左40%、80%サイズ）
+![width:300px](image.jpg)         # 幅指定
+![h:200px](image.jpg)             # 高さ指定
+![bg fit](image.jpg)              # 背景にフィット
+```
+
+### テキストスタイリング
+```markdown
+<!-- _class: lead -->           # このページのみにクラス適用
+<!-- _backgroundColor: #123 --> # このページのみ背景色変更
+**太字**
+*斜体*
+~~取り消し線~~
+`インラインコード`
+```
+
+## スライド構成のベストプラクティス
+
+### 1. タイトルスライド
+- プレゼンテーション名
+- 発表者情報
+- 日付
+- 会社/組織名
+
+### 2. アジェンダスライド
+- 発表内容の概要
+- 番号付きリスト推奨
+- 時間配分があれば記載
+
+### 3. セクション分け
+- セクションタイトルスライドで区切る
+- 一貫したデザインパターンを使用
+- 適切な情報量（1スライド1メッセージ）
+
+### 4. 結論・まとめスライド
+- キーメッセージの再確認
+- 次のアクション
+- 質疑応答の案内
+
+## 提案資料向けの構成テンプレート
+
+### ビジネス提案資料
+```markdown
+1. タイトル・会社紹介
+2. 課題の整理
+3. 提案概要
+4. 解決策の詳細
+5. 実施計画・スケジュール
+6. 予算・投資対効果
+7. リスクと対策
+8. まとめ・次のステップ
+```
+
+### 技術提案資料
+```markdown
+1. タイトル・背景
+2. 現状分析
+3. 技術課題の特定
+4. 提案する技術・手法
+5. アーキテクチャ・設計
+6. 実装計画
+7. 検証・テスト計画
+8. まとめ・Q&A
+```
+
+## LLM指示時の注意事項
+
+### 指示に含めるべき情報
+- スライドの目的（提案、報告、説明など）
+- 対象聴衆（経営層、技術者、顧客など）
+- 発表時間
+- 重要なメッセージ・キーポイント
+- 使用するデータや図表
+
+### 生成時の品質確保
+- 1スライド1メッセージの原則
+- 読みやすいフォントサイズ
+- 適切な余白の確保
+- 論理的な流れの構築
+- ビジュアル要素の効果的な活用
+
+## ファイル命名規則
+
+```
+presentations/
+├── YYYY-MM-DD_プレゼンテーション名.md
+├── templates/
+│   ├── business-proposal.md
+│   ├── technical-proposal.md
+│   └── project-report.md
+└── assets/
+    ├── images/
+    └── themes/
+```
+
+## 出力フォーマット
+
+Marpは以下のフォーマットでエクスポート可能：
+- HTML（ブラウザで表示）
+- PDF（印刷・配布用）
+- PowerPoint（PPTX）
+- PNG/JPEG（画像）
+
+## チェックリスト
+
+スライド作成完了前の確認項目：
+- [ ] フロントマターが正しく設定されている
+- [ ] 各スライドにタイトルがある
+- [ ] 論理的な流れになっている
+- [ ] 1スライドの情報量が適切
+- [ ] 画像パスが正しい
+- [ ] テーマが統一されている
+- [ ] ページネーションが機能している
+
+## 関連ファイル参照
+
+テンプレートファイル:
+- [business-proposal.md](mdc:templates/business-proposal.md)
+- [technical-proposal.md](mdc:templates/technical-proposal.md)
+- [project-report.md](mdc:templates/project-report.md)
