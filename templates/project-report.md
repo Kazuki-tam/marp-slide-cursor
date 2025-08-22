@@ -1,57 +1,184 @@
 ---
 marp: true
-theme: default
-paginate: true
-backgroundColor: #ffffff
-size: 16:9
-header: 'プロジェクト報告書'
-footer: '© 2024 Company Name'
-style: |
-  section {
-    font-size: 19px;
-    line-height: 1.6;
-    padding: 45px;
-  }
-  header { 
-    font-size: 0.7em; 
-    color: #666; 
-    text-align: right;
-  }
-  footer { 
-    font-size: 0.7em; 
-    color: #666; 
-    text-align: center;
-  }
-  h1 { 
-    font-size: 2.3em; 
-    border-bottom: 3px solid #4299e1;
-    padding-bottom: 0.2em;
-  }
-  h2 { 
-    font-size: 1.9em; 
-    border-left: 5px solid #4299e1;
-    padding-left: 0.3em;
-  }
-  table {
-    font-size: 0.85em;
-    border-collapse: collapse;
-    margin: 1em auto;
-    max-width: 90%;
-  }
-  th, td {
-    border: 1px solid #e2e8f0;
-    padding: 0.5em;
-  }
-  th { background-color: #f7fafc; }
+# ↓↓↓ これらの行はテンプレートが機能するために必要です ↓↓↓
+header: ' '
+footer: ' '
 ---
 
+<style>
+/* Google Fontsから日本語フォントを読み込み */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+/* --- 色やフォントの基本設定 --- */
+:root {
+  --color-background: #f8f8f4;
+  --color-foreground: #3a3b5a;
+  --color-heading: #4f86c6;
+  --color-hr: #000000;
+  --font-default: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+}
+
+/* --- スライド全体のスタイル --- */
+section {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-default);
+  font-weight: 400;
+  box-sizing: border-box;
+  border-bottom: 8px solid var(--color-hr);
+  position: relative;
+  line-height: 1.7;
+  font-size: 22px;
+  padding: 56px;
+}
+section:last-of-type {
+  border-bottom: none;
+}
+
+/* --- 見出しのスタイル --- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--color-heading);
+  margin: 0;
+  padding: 0;
+}
+
+/* タイトルページ(h1)のスタイル */
+h1 {
+  font-size: 56px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* 通常スライドのタイトル(##) */
+h2 {
+  position: absolute;
+  top: 40px;
+  left: 56px;
+  right: 56px;
+  font-size: 40px;
+  padding-top: 0;
+  padding-bottom: 16px;
+}
+
+/* h2の疑似要素(::after)を使って、短い線を実装 */
+h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 8px;
+  width: 60px;
+  height: 2px;
+  background-color: var(--color-hr);
+}
+
+/* h2と後続コンテンツの間のスペースを確保 */
+h2 + * {
+  margin-top: 112px;
+}
+
+/* サブ見出し (例: 目的, 目標) */
+h3 {
+  color: var(--color-foreground);
+  font-size: 28px;
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+/* --- リストのスタイル --- */
+ul, ol {
+  padding-left: 32px;
+}
+li {
+  margin-bottom: 10px;
+}
+
+/* --- テーブルのスタイル --- */
+table {
+  width: 90%;
+  margin: 1em auto;
+  border-collapse: collapse;
+  font-size: 0.85em;
+}
+
+th, td {
+  padding: 0.7em 0.5em;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background-color: #f7fafc;
+  font-weight: 600;
+  border-bottom: 2px solid #cbd5e0;
+}
+
+tr:hover {
+  background-color: #f9fafb;
+}
+
+/* フッターとして機能する、太い青いラインを実装 */
+footer {
+  font-size: 0;
+  color: transparent;
+  position: absolute;
+  left: 56px;
+  right: 56px;
+  bottom: 40px;
+  height: 8px;
+  background-color: var(--color-heading);
+}
+
+/* ★★★ ロゴの配置方法を、calc()を使った最も堅牢な方法に変更 ★★★ */
+header {
+  font-size: 0;
+  color: transparent;
+  background-image: url('ロゴ.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top right;
+  
+  position: absolute;
+  top: 40px;
+  
+  /* rightプロパティの代わりに、calc()で左からの位置を計算して配置を安定させます */
+  /* 計算式: (コンテナの幅 - ロゴの幅 - 右の余白) */
+  left: calc(100% - 180px - 56px);
+  
+  /*
+    【重要】下のwidthの値を変更した場合、
+    上のcalc()内の「180px」も同じ値にしてください。
+  */
+  width: 180px;
+  height: 50px;
+}
+
+/* --- 特別なクラス --- */
+section.lead {
+  border-bottom: 8px solid var(--color-hr);
+}
+
+/* タイトルページではフッターラインとロゴ(header)を非表示にする */
+section.lead footer,
+section.lead header {
+  display: none;
+}
+
+section.lead h1 {
+  margin-bottom: 24px;
+}
+section.lead p {
+  font-size: 24px;
+  color: var(--color-foreground);
+}
+</style>
+
 <!-- _class: lead -->
-# プロジェクト報告書テンプレート
+# ABC社様
+# XXXプロジェクト報告書
 
-**[プロジェクト名]**
-
-報告日：YYYY年MM月DD日
-報告者：[氏名]
+報告日：YYYY年MM月DD日  
+報告者：[氏名]  
 対象期間：YYYY年MM月 - YYYY年MM月
 
 ---
